@@ -1,0 +1,20 @@
+{
+  "stream": {
+    "enableServices": [
+      "youtube",
+      "twicas",
+      "kick"
+    ]
+  },
+  "fuyukaApi": {
+    "baseUrl": "ws://127.0.0.1:38321",
+    "answerLevel": 100,
+    "answerLength": {
+      "default": 30
+    }
+  },
+  "oneComme": {
+    "baseUrl": "ws://127.0.0.1:11180",
+    "pathUsersCsv": ""
+  }
+}

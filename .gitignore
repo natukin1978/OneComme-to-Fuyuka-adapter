@@ -205,3 +205,8 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Not managed as it is important information
+/config.json
+/one_comme_to_fuyuka_adapter.log
+/prompts/additional_requests_prompt.txt
