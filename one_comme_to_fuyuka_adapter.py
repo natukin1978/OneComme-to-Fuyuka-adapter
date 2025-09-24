@@ -12,6 +12,7 @@ g.base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
 from config_helper import read_config
 from fuyuka_helper import Fuyuka
 from one_comme_message_helper import create_message_json
+from one_comme_users import OneCommeUsers
 from random_helper import is_hit_by_message_json
 from text_helper import read_text, read_text_set
 from websocket_helper import websocket_listen_forever
@@ -71,8 +72,10 @@ async def main():
                     # 無視するID
                     return
 
-                answerLevel = g.config["fuyukaApi"]["answerLevel"]
-                needs_response = is_hit_by_message_json(answerLevel, json_data)
+                answer_level = g.config["fuyukaApi"]["answerLevel"]
+                answer_length = g.config["fuyukaApi"]["answerLength"]["default"]
+                needs_response = is_hit_by_message_json(answer_level, json_data)
+                OneCommeUsers.update_additional_requests(json_data, answer_length)
                 await Fuyuka.send_message_by_json_with_buf(json_data, needs_response)
         except json.JSONDecodeError as e:
             logger.error(f"Error JSONDecode: {e}")

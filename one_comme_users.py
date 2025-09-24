@@ -86,5 +86,3 @@ class OneCommeUsers:
     def update_message_json(json_data: dict[str, any]) -> None:
         OneCommeUsers.update_is_first_on_stream(json_data)
         OneCommeUsers.update_nickname(json_data)
-        answer_length = g.config["fuyukaApi"]["answerLength"]["default"]
-        OneCommeUsers.update_additional_requests(json_data, answer_length)
