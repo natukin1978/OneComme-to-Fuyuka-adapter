@@ -25,9 +25,16 @@ g.ADDITIONAL_REQUESTS_PROMPT = read_text("prompts/additional_requests_prompt.txt
 g.config = read_config()
 
 # ロガーの設定
-logging.basicConfig(filename=f"{g.app_name}.log", encoding="utf-8", level=logging.INFO)
-
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+# 画面出力設定
+consoleHandler = logging.StreamHandler()
+logger.addHandler(consoleHandler)
+
+# ファイル出力設定
+fileHandler = logging.FileHandler(f"{g.app_name}.log", mode="a", encoding="utf-8")
+logger.addHandler(fileHandler)
 
 g.map_is_first_on_stream = {}
 g.set_exclude_id = read_text_set("exclude_id.txt")
