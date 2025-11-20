@@ -8,15 +8,17 @@ logger = logging.getLogger(__name__)
 
 
 def is_hit(percent: int) -> bool:
+    probability_controller.increment_comment_count()
     if percent >= 100:
         return True
-    probability_controller.increment_comment_count()
+    random_value = random.random()
     response_probability = probability_controller.get_current_response_probability()
-    result = random.random() < response_probability
+    result = random_value < response_probability
     if result:
         logger.info("hit!")
     else:
         logger.info("skip.")
+    logger.info(f"{response_probability:.0%} の確率で、{random_value:.0%} の位置でした。")
     return result
 
 
