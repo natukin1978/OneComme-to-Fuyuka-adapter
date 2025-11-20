@@ -14,6 +14,7 @@ g.base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
 setup_app_logging(log_file_path=f"{g.app_name}.log")
 logger = logging.getLogger(__name__)
 
+import probability_controller
 from config_helper import read_config
 from fuyuka_helper import Fuyuka
 from one_comme_message_helper import create_message_json
@@ -103,6 +104,8 @@ async def main():
                 websocket_uri, recv_stream_live_response, set_ws_stream_live
             )
         )
+
+    asyncio.create_task(probability_controller.start_frequency_monitor())
 
     try:
         await asyncio.Future()
