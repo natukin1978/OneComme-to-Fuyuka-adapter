@@ -10,6 +10,8 @@ class Fuyuka:
         if not g.websocket_fuyuka:
             return
         json_str = json.dumps(json_data)
+        json_data.pop("isFirst", None)
+        json_data.pop("isFirstOnStream", None)
         await g.websocket_fuyuka.send(json_str)
 
     @staticmethod
