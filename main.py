@@ -5,17 +5,23 @@ import os
 import sys
 
 import global_value as g
+from config_helper import read_config
+from input_helper import input_with_timeout
 from logging_setup import setup_app_logging
 
 g.app_name = "one_comme_to_fuyuka_adapter"
 g.base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
 
+res = input_with_timeout("前回の続きですか？(y/n) [10秒以内に未入力なら 'n']: ", timeout=10)
+is_continue = (res == "y")
+
+g.config = read_config()
+
 # ロガーの設定
-setup_app_logging(log_file_path=f"{g.app_name}.log")
+setup_app_logging(g.config["logLevel"], log_file_path=f"{g.app_name}.log")
 logger = logging.getLogger(__name__)
 
 import probability_controller
-from config_helper import read_config
 from fuyuka_helper import Fuyuka
 from one_comme_message_helper import create_message_json
 from one_comme_users import OneCommeUsers
@@ -23,12 +29,7 @@ from random_helper import is_hit_by_message_json
 from text_helper import read_text, read_text_set
 from websocket_helper import websocket_listen_forever
 
-print("前回の続きですか？(y/n) ", end="")
-is_continue = input() == "y"
-
 g.ADDITIONAL_REQUESTS_PROMPT = read_text("prompts/additional_requests_prompt.txt")
-
-g.config = read_config()
 
 g.map_is_first_on_stream = {}
 g.set_exclude_id = read_text_set("exclude_id.txt")
