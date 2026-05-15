@@ -74,12 +74,12 @@ class OneCommeUsers:
         ar = ""
         if answer_length == 0:
             ar = "The content is understood and the response is OK"
-        # else:
-        #     ar = " ".join(
-        #         [
-        #             g.ADDITIONAL_REQUESTS_PROMPT.format(answerLength=answer_length),
-        #         ]
-        #     )
+        elif answer_length != g.config["fuyukaApi"]["answerLength"]["default"]:
+            ar = " ".join(
+                [
+                    g.ADDITIONAL_REQUESTS_PROMPT.format(answerLength=answer_length),
+                ]
+            )
         if not ar:
             return
         json_data["additionalRequests"] = ar
