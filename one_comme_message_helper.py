@@ -15,7 +15,7 @@ def create_message_json(data: dict[str, any]) -> dict[str, any]:
         "isFirst": False,
         "isFirstOnStream": None,  # すぐ下で設定する
         "noisy": False,
-        "additionalRequests": None,  # すぐ下で設定する
+        # "additionalRequests": None,  # すぐ下で設定する
     }
     OneCommeUsers.update_message_json(json_data)
     return json_data
